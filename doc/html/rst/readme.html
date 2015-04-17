@@ -1,0 +1,302 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>OfficeDissector &mdash; OfficeDissector 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="OfficeDissector 1.0 documentation" href="../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../index.html">OfficeDissector 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="officedissector">
+<h1>OfficeDissector<a class="headerlink" href="#officedissector" title="Permalink to this headline">¶</a></h1>
+<p>OfficeDissector is a parser library for static security analysis of
+Office Open XML (OOXML) Documents, created by Grier Forensics for the
+Cyber System Assessments Group at MIT&#8217;s Lincoln Laboratory.</p>
+<p>OfficeDissector is the first parser designed specifically for security
+analysis of OOXML documents. It exposes all internals, including
+document properties, parts, content-type, relationships, embedded macros
+and multimedia, and comments, and more. It provides full JSON export,
+and a MASTIFF based plugin architecture. It also includes a nearly 600
+MB test corpus, unit tests with nearly 100% coverage, smoke tests
+running against the entire corpus, and simple, well factored, fully
+commented code</p>
+<div class="section" id="install">
+<h2>Install<a class="headerlink" href="#install" title="Permalink to this headline">¶</a></h2>
+<p>OfficeDissector requires the lxml package and Python version 2.7. To use OfficeDissector without installing it, set the <tt class="docutils literal"><span class="pre">PYTHONPATH</span></tt> to
+the <tt class="docutils literal"><span class="pre">officedissector</span></tt> directory:</p>
+<div class="highlight-python"><pre>$ export PYTHONPATH=/path/to/thisfolder</pre>
+</div>
+<p>Alternatively, it can be installed using pip (recommended) or python
+setup:</p>
+<div class="highlight-python"><pre>$ sudo pip install /path/to/thisfolder # Recommended, as pip supports uninstall
+$ sudo python setup.py install # Alternative</pre>
+</div>
+</div>
+<div class="section" id="documentation">
+<h2>Documentation<a class="headerlink" href="#documentation" title="Permalink to this headline">¶</a></h2>
+<p>To view OfficeDissector documentation, open in a browser:</p>
+<div class="highlight-python"><pre>$ doc/html/index.html</pre>
+</div>
+</div>
+<div class="section" id="testing">
+<h2>Testing<a class="headerlink" href="#testing" title="Permalink to this headline">¶</a></h2>
+<p>To test, first set PYTHONPATH or install <tt class="docutils literal"><span class="pre">officedissector</span></tt> as
+described above. Then:</p>
+<div class="highlight-python"><pre># Unit tests
+$ cd test/unit_test
+$ python test_officedissector.py
+
+# Smoke tests
+$ cd test
+$ python smoke_tests.py</pre>
+</div>
+<p>The smoke tests will create log files with more information about them.</p>
+</div>
+<div class="section" id="mastiff-plugins">
+<h2>MASTIFF Plugins<a class="headerlink" href="#mastiff-plugins" title="Permalink to this headline">¶</a></h2>
+<p>To find more information about the MASTIFF architecture and sample
+plugins, see <tt class="xref doc docutils literal"><span class="pre">mastiff-plugins/README.txt</span></tt>.</p>
+</div>
+<div class="section" id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
+<p>Below is an ipython session demonstrating usage of OfficeDissector:</p>
+<div class="highlight-python"><pre>$ ipython
+In [1]: import officedissector
+In [2]: doc = officedissector.doc.Document('test/fraunhoferlibrary/Artikel.docx')
+In [4]: doc.is_macro_enabled
+Out[4]: False
+
+In [5]: doc.is_template
+Out[5]: False
+
+In [6]: mp = doc.main_part()
+In [7]: mp.content_type()
+Out[7]: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml'
+
+In [9]: mp.name
+Out[9]: '/word/document.xml'
+
+In [10]: mp.content_type()
+Out[10]: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml'
+
+# We can read the part's stream of data:
+In [17]: mp.stream().read(200)
+Out[17]: '&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;\r\n&lt;w:document xmlns:wpc="http://schemas.microsoft.com/office/word/2010/wordprocessingCanvas" xmlns:mc="http://schemas.openxmlformats.org/markup-c'
+
+# Or use XPath to parse it:
+In [33]: t = mp.xpath('//w:t', {'w': "http://schemas.openxmlformats.org/wordprocessingml/2006/main"})
+In [37]: t[2].text
+Out[37]: u'Das vorliegende Dokument ist ein Beispiel f\xfcr einen zur Publikation in einer Zeitschrift vorgesehenen Artikel. Es verwendet f\xfcr Autor und Titel in den Dokumenteigenschaften festgelegte Eintr\xe4ge.'
+
+# All Relationships in and out are exposed:
+In [38]: mp.relationships_in()
+Out[38]: [Relationship [rId1] (source Part [RootPart])]
+
+In [39]: mp.relationships_out()
+Out[39]:
+[Relationship [rId8] (source Part [/word/document.xml]),
+ Relationship [rId13] (source Part [/word/document.xml]),
+ Relationship [rId3] (source Part [/word/document.xml]),
+ ...
+ Relationship [rId14] (source Part [/word/document.xml])]
+
+In [40]: rel = mp.relationships_out()[0]
+In [43]: rel.type
+Out[43]: 'http://schemas.openxmlformats.org/officeDocument/2006/relationships/endnotes'
+
+In [46]: endnotes = rel.target_part
+In [48]: endnotes.content_type()
+Out[48]: 'application/vnd.openxmlformats-officedocument.wordprocessingml.endnotes+xml'
+
+# Any Part (or the entire Document) can be exported to JSON:
+In [50]: print endnotes.to_json()
+{
+    "content-type": "application/vnd.openxmlformats-officedocument.wordprocessingml.endnotes+xml",
+    "uri": "/word/endnotes.xml",
+    "relationships_out": [],
+    "relationships_in": [
+        "Relationship [rId8] (source Part [/word/document.xml])"
+    ]
+}
+
+# Features are automatically exposed:
+In [55]: doc.features.[TAB]
+...
+doc.features.comments
+doc.features.custom_properties
+doc.features.custom_xml
+doc.features.digital_signatures
+doc.features.doc
+doc.features.embedded_controls
+doc.features.embedded_objects
+doc.features.embedded_packages
+doc.features.fonts
+doc.features.get_parts
+doc.features.get_union
+doc.features.images
+doc.features.macros
+doc.features.sounds
+doc.features.videos
+
+In [55]: doc.features.images
+Out[55]: [Part [/word/media/image1.jpeg]]
+
+In [56]: image = doc.features.images[0]
+In [58]: image.content_type()
+Out[58]: 'image/jpeg'
+
+# We can export the binary data to JSON as well, by setting include_stream = True:
+In [61]: print image.to_json(include_stream = True)
+{
+    "stream_b64": "/9j/4AAQSkZJRgABAQEASABIAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCAAFAAUDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD3uGGO3iWKJdqL0Gc0UUUAf//Z",
+    "content-type": "image/jpeg",
+    "uri": "/word/media/image1.jpeg",
+    "relationships_out": [],
+    "relationships_in": [
+        "Relationship [rId1] (source Part [/word/theme/theme1.xml])"
+    ]
+}
+
+# Check for macros:
+In [62]: doc.features.macros
+Out[62]: []
+
+# Or comments:
+In [63]: doc.features.comments
+Out[63]: []
+
+# Core properties are exposed:
+In [64]: doc.core_properties.[TAB]
+...
+doc.core_properties.content_status
+doc.core_properties.core_prop_part
+doc.core_properties.created
+doc.core_properties.creator
+doc.core_properties.description
+doc.core_properties.identifier
+doc.core_properties.keywords
+doc.core_properties.language
+doc.core_properties.last_modified_by
+doc.core_properties.last_printed
+doc.core_properties.modified
+doc.core_properties.name
+doc.core_properties.parse_all
+doc.core_properties.parse_prop
+doc.core_properties.revision
+doc.core_properties.subject
+doc.core_properties.title
+doc.core_properties.version
+doc.core_properties.category
+
+In [68]: doc.core_properties.modified
+Out[68]: '2009-12-04T14:47:00Z'</pre>
+</div>
+</div>
+<div class="section" id="analyzing-ooxml">
+<h2>Analyzing OOXML<a class="headerlink" href="#analyzing-ooxml" title="Permalink to this headline">¶</a></h2>
+<p>See <tt class="xref doc docutils literal"><span class="pre">ANALYZING_OOXML.txt</span></tt> for a quick start guide on how to
+use OfficeDissector to analyze OOXML documents.</p>
+</div>
+<div class="section" id="api">
+<h2>API<a class="headerlink" href="#api" title="Permalink to this headline">¶</a></h2>
+<p>For more details about OfficeDissector, see the <tt class="xref doc docutils literal"><span class="pre">API</span></tt> documentation.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">OfficeDissector</a><ul>
+<li><a class="reference internal" href="#install">Install</a></li>
+<li><a class="reference internal" href="#documentation">Documentation</a></li>
+<li><a class="reference internal" href="#testing">Testing</a></li>
+<li><a class="reference internal" href="#mastiff-plugins">MASTIFF Plugins</a></li>
+<li><a class="reference internal" href="#usage">Usage</a></li>
+<li><a class="reference internal" href="#analyzing-ooxml">Analyzing OOXML</a></li>
+<li><a class="reference internal" href="#api">API</a></li>
+</ul>
+</li>
+</ul>
+
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/rst/readme.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../index.html">OfficeDissector 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013-2015 Grier Forensics.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b1.
+    </div>
+  </body>
+</html>

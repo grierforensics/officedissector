@@ -1,0 +1,309 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>part – OfficeDissector - Part Class &mdash; OfficeDissector 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="OfficeDissector 1.0 documentation" href="../index.html" />
+    <link rel="up" title="OfficeDissector API Documentation" href="api.html" />
+    <link rel="next" title="rel – OfficeDissector - Relationship Class" href="rel.html" />
+    <link rel="prev" title="doc – OfficeDissector - Document Class" href="doc.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="rel.html" title="rel – OfficeDissector - Relationship Class"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="doc.html" title="doc – OfficeDissector - Document Class"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">OfficeDissector 1.0 documentation</a> &raquo;</li>
+          <li><a href="api.html" accesskey="U">OfficeDissector API Documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="module-officedissector.part">
+<span id="part-officedissector-part-class"></span><h1><tt class="xref py py-mod docutils literal"><span class="pre">part</span></tt> &#8211; OfficeDissector - Part Class<a class="headerlink" href="#module-officedissector.part" title="Permalink to this headline">¶</a></h1>
+<p>A Part of a Document.</p>
+<dl class="class">
+<dt id="officedissector.part.Part">
+<em class="property">class </em><tt class="descclassname">officedissector.part.</tt><tt class="descname">Part</tt><big>(</big><em>doc</em>, <em>name</em><big>)</big><a class="headerlink" href="#officedissector.part.Part" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <a class="reference internal" href="#officedissector.part.Part" title="officedissector.part.Part"><tt class="xref py py-class docutils literal"><span class="pre">Part</span></tt></a> of a Document.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Variables:</th><td class="field-body"><ul class="first last simple">
+<li><strong>doc</strong> &#8211; the Document object associated with this Part.</li>
+<li><strong>name</strong> &#8211; name of <a class="reference internal" href="#officedissector.part.Part" title="officedissector.part.Part"><tt class="xref py py-class docutils literal"><span class="pre">Part</span></tt></a>.
+Always has a preceding &#8216;/&#8217; eg. &#8216;/word/document.xml&#8217;</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="officedissector.part.Part.__init__">
+<tt class="descname">__init__</tt><big>(</big><em>doc</em>, <em>name</em><big>)</big><a class="headerlink" href="#officedissector.part.Part.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize the <a class="reference internal" href="#officedissector.part.Part" title="officedissector.part.Part"><tt class="xref py py-class docutils literal"><span class="pre">Part</span></tt></a>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>doc</strong> (<a class="reference internal" href="doc.html#officedissector.doc.Document" title="officedissector.doc.Document"><tt class="xref py py-class docutils literal"><span class="pre">Document</span></tt></a>) &#8211; the <a class="reference internal" href="doc.html#officedissector.doc.Document" title="officedissector.doc.Document"><tt class="xref py py-class docutils literal"><span class="pre">Document</span></tt></a> object associated with this <a class="reference internal" href="#officedissector.part.Part" title="officedissector.part.Part"><tt class="xref py py-class docutils literal"><span class="pre">Part</span></tt></a></li>
+<li><strong>name</strong> (<cite>string</cite>) &#8211; the name of the <a class="reference internal" href="#officedissector.part.Part" title="officedissector.part.Part"><tt class="xref py py-class docutils literal"><span class="pre">Part</span></tt></a></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="officedissector.part.Part.content_type">
+<tt class="descname">content_type</tt><big>(</big><big>)</big><a class="headerlink" href="#officedissector.part.Part.content_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Determine Content Type of this <a class="reference internal" href="#officedissector.part.Part" title="officedissector.part.Part"><tt class="xref py py-class docutils literal"><span class="pre">Part</span></tt></a>
+by parsing [Content_Types].xml</p>
+<p>For information about how Content Types are stored, see:
+<a class="reference external" href="http://office.microsoft.com/en-us/office-open-xml-i-exploring-the-office-open-xml-formats-RZ010243529.aspx?section=16">http://office.microsoft.com/en-us/office-open-xml-i-exploring-the-office-open-xml-formats-RZ010243529.aspx?section=16</a></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the Content Type of this <a class="reference internal" href="#officedissector.part.Part" title="officedissector.part.Part"><tt class="xref py py-class docutils literal"><span class="pre">Part</span></tt></a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="officedissector.part.Part.relationships_in">
+<tt class="descname">relationships_in</tt><big>(</big><big>)</big><a class="headerlink" href="#officedissector.part.Part.relationships_in" title="Permalink to this definition">¶</a></dt>
+<dd><p>Determine all <tt class="xref py py-class docutils literal"><span class="pre">Relationship</span></tt> objects
+for which this part is the target.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">doc</span><span class="o">.</span><span class="n">part_by_name</span><span class="p">[</span><span class="s">&#39;/word/document.xml&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">relationships_in</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">target</span>
+<span class="go">&#39;word/document.xml&#39;</span>
+</pre></div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">list of all Relationships in</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="officedissector.part.Part.relationships_out">
+<tt class="descname">relationships_out</tt><big>(</big><big>)</big><a class="headerlink" href="#officedissector.part.Part.relationships_out" title="Permalink to this definition">¶</a></dt>
+<dd><p>Determine all <tt class="xref py py-class docutils literal"><span class="pre">Relationship</span></tt> objects
+for which this part is the source.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">rel</span> <span class="ow">in</span> <span class="n">doc</span><span class="o">.</span><span class="n">part_by_name</span><span class="p">[</span><span class="s">&#39;/word/document.xml&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">relationships_out</span><span class="p">():</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="k">print</span> <span class="n">rel</span><span class="o">.</span><span class="n">source</span>
+<span class="go">Part [/word/document.xml]</span>
+<span class="go">Part [/word/document.xml]</span>
+<span class="go">Part [/word/document.xml]</span>
+</pre></div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">list of all Relationships out</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="officedissector.part.Part.stream">
+<tt class="descname">stream</tt><big>(</big><big>)</big><a class="headerlink" href="#officedissector.part.Part.stream" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a file-like object of this <a class="reference internal" href="#officedissector.part.Part" title="officedissector.part.Part"><tt class="xref py py-class docutils literal"><span class="pre">Part</span></tt></a>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">a file-like object</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="officedissector.part.Part.to_json">
+<tt class="descname">to_json</tt><big>(</big><em>include_stream=False</em><big>)</big><a class="headerlink" href="#officedissector.part.Part.to_json" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export this object to JSON</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>include_stream</strong> (<cite>bool</cite>) &#8211; Optional - Include base64 encoded stream of
+this <a class="reference internal" href="#officedissector.part.Part" title="officedissector.part.Part"><tt class="xref py py-class docutils literal"><span class="pre">Part</span></tt></a> (Default false).</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">a JSON encoded string</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="officedissector.part.Part.to_reference">
+<tt class="descname">to_reference</tt><big>(</big><big>)</big><a class="headerlink" href="#officedissector.part.Part.to_reference" title="Permalink to this definition">¶</a></dt>
+<dd><p>A which uniquely identifies this object.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">string which uniquely identifies this object</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="officedissector.part.Part.xml">
+<tt class="descname">xml</tt><big>(</big><big>)</big><a class="headerlink" href="#officedissector.part.Part.xml" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse the XML of <a class="reference internal" href="#officedissector.part.Part" title="officedissector.part.Part"><tt class="xref py py-class docutils literal"><span class="pre">Part</span></tt></a>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">an <cite>ElementTree</cite> of the parsed XML</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="officedissector.part.Part.xpath">
+<tt class="descname">xpath</tt><big>(</big><em>exp</em>, <em>xmlns=None</em><big>)</big><a class="headerlink" href="#officedissector.part.Part.xpath" title="Permalink to this definition">¶</a></dt>
+<dd><p>Evaluate the XPath expression &#8216;exp&#8217; on the XML of the <a class="reference internal" href="#officedissector.part.Part" title="officedissector.part.Part"><tt class="xref py py-class docutils literal"><span class="pre">Part</span></tt></a>.</p>
+<p>To properly understand how to use xpath, see the documentation
+of XML <tt class="xref doc docutils literal"><span class="pre">Namespaces</span></tt>.</p>
+<p>The suggested method to use xpath is to provide a user-defined
+namespace mapping. For example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">CP_NAMESPACE</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;cp&#39;</span><span class="p">:</span> <span class="s">&quot;http://schemas.openxmlformats.org/package/2006/metadata/core-properties&quot;</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>                <span class="s">&#39;dc&#39;</span><span class="p">:</span> <span class="s">&quot;http://purl.org/dc/elements/1.1/&quot;</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>                <span class="s">&#39;dcterms&#39;</span><span class="p">:</span> <span class="s">&quot;http://purl.org/dc/terms/&quot;</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>                <span class="s">&#39;dcmitype&#39;</span><span class="p">:</span> <span class="s">&quot;http://purl.org/dc/dcmitype/&quot;</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>                <span class="s">&#39;xsi&#39;</span><span class="p">:</span> <span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span><span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">part</span><span class="o">.</span><span class="n">xpath</span><span class="p">(</span><span class="s">&#39;/cp:coreProperties/dcterms:created&#39;</span><span class="p">,</span> <span class="n">CP_NAMESPACE</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">text</span>
+<span class="go">&#39;2008-11-03T19:31:00Z&#39;</span>
+</pre></div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>exp</strong> (<cite>string</cite>) &#8211; the XPATH expression</li>
+<li><strong>xmlns</strong> (<cite>dict</cite>) &#8211; Optional - the namespace mapping (default: <cite>None</cite>)</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">the result of the XPATH query.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="doc.html"
+                        title="previous chapter"><tt class="docutils literal"><span class="pre">doc</span></tt> &#8211; OfficeDissector - Document Class</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="rel.html"
+                        title="next chapter"><tt class="docutils literal"><span class="pre">rel</span></tt> &#8211; OfficeDissector - Relationship Class</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/rst/part.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="rel.html" title="rel – OfficeDissector - Relationship Class"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="doc.html" title="doc – OfficeDissector - Document Class"
+             >previous</a> |</li>
+        <li><a href="../index.html">OfficeDissector 1.0 documentation</a> &raquo;</li>
+          <li><a href="api.html" >OfficeDissector API Documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013-2015 Grier Forensics.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b1.
+    </div>
+  </body>
+</html>

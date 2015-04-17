@@ -1,0 +1,7 @@
+[Core]
+Name = OfficeDissector Skeleton Plugin
+Module = Office-officedissector-skel
+
+[Documentation]
+Description = OfficeDissector Skeleton Plugin
+Author = Brandon Gordon - Grier Forensics

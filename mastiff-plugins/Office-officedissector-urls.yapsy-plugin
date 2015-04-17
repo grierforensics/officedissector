@@ -1,0 +1,7 @@
+[Core]
+Name = OfficeDissector Extract URLs 
+Module = Office-officedissector-urls
+
+[Documentation]
+Description = Extract URLs from OOXML document using OfficeDissector
+Author = Brandon Gordon - Grier Forensics

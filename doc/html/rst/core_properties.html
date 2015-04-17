@@ -1,0 +1,173 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>core_properties – OfficeDissector - CoreProperties Class &mdash; OfficeDissector 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="OfficeDissector 1.0 documentation" href="../index.html" />
+    <link rel="up" title="OfficeDissector API Documentation" href="api.html" />
+    <link rel="next" title="XML Namespaces Overview" href="namespaces.html" />
+    <link rel="prev" title="features – OfficeDissector - Features Class" href="features.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="namespaces.html" title="XML Namespaces Overview"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="features.html" title="features – OfficeDissector - Features Class"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">OfficeDissector 1.0 documentation</a> &raquo;</li>
+          <li><a href="api.html" accesskey="U">OfficeDissector API Documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="module-officedissector.core_properties">
+<span id="core-properties-officedissector-coreproperties-class"></span><h1><tt class="xref py py-mod docutils literal"><span class="pre">core_properties</span></tt> &#8211; OfficeDissector - CoreProperties Class<a class="headerlink" href="#module-officedissector.core_properties" title="Permalink to this headline">¶</a></h1>
+<p>Parses and exposes the Core Properties of the Document.</p>
+<dl class="class">
+<dt id="officedissector.core_properties.CoreProperties">
+<em class="property">class </em><tt class="descclassname">officedissector.core_properties.</tt><tt class="descname">CoreProperties</tt><big>(</big><em>core_prop_part</em><big>)</big><a class="headerlink" href="#officedissector.core_properties.CoreProperties" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse and expose the Core Properties of the <a class="reference internal" href="doc.html#officedissector.doc.Document" title="officedissector.doc.Document"><tt class="xref py py-class docutils literal"><span class="pre">Document</span></tt></a>.</p>
+<p>Parse the Core Properties with element names and namespace prefixes
+according to the OOXML specifications in <a class="reference external" href="http://standards.iso.org/ittf/PubliclyAvailableStandards/c061796_ISO_IEC_29500-2_2012_Electronic_inserts.zip">ISO/IEC:29500-2.11</a>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Variables:</th><td class="field-body"><ul class="first last simple">
+<li><strong>category</strong> &#8211; </li>
+<li><strong>content_status</strong> &#8211; </li>
+<li><strong>created</strong> &#8211; </li>
+<li><strong>creator</strong> &#8211; </li>
+<li><strong>description</strong> &#8211; </li>
+<li><strong>identifier</strong> &#8211; </li>
+<li><strong>language</strong> &#8211; </li>
+<li><strong>last_modified_by</strong> &#8211; </li>
+<li><strong>last_printed</strong> &#8211; </li>
+<li><strong>modified</strong> &#8211; </li>
+<li><strong>revision</strong> &#8211; </li>
+<li><strong>subject</strong> &#8211; </li>
+<li><strong>title</strong> &#8211; </li>
+<li><strong>version</strong> &#8211; </li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="officedissector.core_properties.CoreProperties.__init__">
+<tt class="descname">__init__</tt><big>(</big><em>core_prop_part</em><big>)</big><a class="headerlink" href="#officedissector.core_properties.CoreProperties.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize the Core Properties object.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>core_prop_part</strong> (<a class="reference internal" href="part.html#officedissector.part.Part" title="officedissector.part.Part"><tt class="xref py py-class docutils literal"><span class="pre">Part</span></tt></a>) &#8211; the <a class="reference internal" href="part.html#officedissector.part.Part" title="officedissector.part.Part"><tt class="xref py py-class docutils literal"><span class="pre">Part</span></tt></a> which contains the
+information about Core Properties.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="officedissector.core_properties.CoreProperties.parse_all">
+<tt class="descname">parse_all</tt><big>(</big><big>)</big><a class="headerlink" href="#officedissector.core_properties.CoreProperties.parse_all" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse all Core Properties.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="features.html"
+                        title="previous chapter"><tt class="docutils literal"><span class="pre">features</span></tt> &#8211; OfficeDissector - Features Class</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="namespaces.html"
+                        title="next chapter">XML Namespaces Overview</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/rst/core_properties.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="namespaces.html" title="XML Namespaces Overview"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="features.html" title="features – OfficeDissector - Features Class"
+             >previous</a> |</li>
+        <li><a href="../index.html">OfficeDissector 1.0 documentation</a> &raquo;</li>
+          <li><a href="api.html" >OfficeDissector API Documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013-2015 Grier Forensics.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b1.
+    </div>
+  </body>
+</html>

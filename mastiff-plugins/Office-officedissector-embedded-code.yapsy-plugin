@@ -1,0 +1,7 @@
+[Core]
+Name = OfficeDissector Extract Embedded Code
+Module = Office-officedissector-embedded-code
+
+[Documentation]
+Description = Extract embedded code from OOXML document using OfficeDissector
+Author = Brandon Gordon - Grier Forensics

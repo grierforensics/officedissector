@@ -1,0 +1,237 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>OfficeDissector MASTIFF Plugin README &mdash; OfficeDissector 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="OfficeDissector 1.0 documentation" href="../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../index.html">OfficeDissector 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="officedissector-mastiff-plugin-readme">
+<h1>OfficeDissector MASTIFF Plugin README<a class="headerlink" href="#officedissector-mastiff-plugin-readme" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="install-mastiff">
+<h2>Install MASTIFF<a class="headerlink" href="#install-mastiff" title="Permalink to this headline">¶</a></h2>
+<p>Download MASTIFF source: <a class="reference external" href="http://sourceforge.net/projects/mastiff/">http://sourceforge.net/projects/mastiff/</a></p>
+<p>Unpack.</p>
+<div class="highlight-python"><pre>$ tar -xzf mastiff-0.6.0.tar.gz</pre>
+</div>
+<p>Install prerequisites for MASTIFF:</p>
+<div class="highlight-python"><pre>$ sudo aptitude install python-setuptools
+$ sudo aptitude install python-magic</pre>
+</div>
+<p>Install (for development testing):</p>
+<div class="highlight-python"><pre>$ sudo make dev</pre>
+</div>
+<p>(For testing OfficeDissector plugins, installing all other plugin
+requirements is not necessary. However, errors occur if they are present
+without the required modules. Therefore, if not installing all plugin
+requirements, remove all Generic plugins from: plugins/GEN/.)</p>
+<p>To uninstall:</p>
+<div class="highlight-python"><pre>$ sudo make dev-clean</pre>
+</div>
+</div>
+<div class="section" id="configuring-mastiff">
+<h2>Configuring MASTIFF<a class="headerlink" href="#configuring-mastiff" title="Permalink to this headline">¶</a></h2>
+<p>The mastiff.conf file controls all settings and paths for MASTIFF.
+MASTIFF (apparently) searches for it in /etc/mastiff/mastiff.conf,
+~/.mastiff.conf, and ./mastiff.conf. You can also force MASTIFF to use a
+specific path to mastiff.conf through the -c command line option.</p>
+</div>
+<div class="section" id="install-officedissector-plugins">
+<h2>Install OfficeDissector Plugins<a class="headerlink" href="#install-officedissector-plugins" title="Permalink to this headline">¶</a></h2>
+<p>Copy plugins to the MASTIFF source file directory (created when
+unpacking the source tarball):</p>
+<div class="highlight-python"><pre>$ cp path/to/officedissector/mastiff-plugins/* path/to/mastiff/plugins/Office</pre>
+</div>
+<p>(MASTIFF&#8217;s plugins directory is specified in the mastiff.conf file.)</p>
+<p>MASTIFF uses the magic file to detect OOXML documents. If running:</p>
+<div class="highlight-python"><pre>$ file test/unit_test/testdocs/test.docx</pre>
+</div>
+<p>does not show Microsoft Word 2007+, upgrade the magic library to
+identify OOXML files:</p>
+<div class="highlight-python"><pre>$ cp /etc/magic /tmp/magic.backup
+$ sudo sh -c 'cat mastiff-plugins/magic-ooxml &gt;&gt; /etc/magic'</pre>
+</div>
+<p>For more information, see:
+<a class="reference external" href="http://serverfault.com/questions/338087/making-libmagic-file-detect-docx-files">http://serverfault.com/questions/338087/making-libmagic-file-detect-docx-files</a></p>
+<p>Alternatively, installing TrID ( <a class="reference external" href="http://mark0.net/soft-trid-e.html">http://mark0.net/soft-trid-e.html</a> ) and
+editing mastiff.conf to provide the path to TrID should fix this
+problem.</p>
+</div>
+<div class="section" id="run-mastiff">
+<h2>Run MASTIFF<a class="headerlink" href="#run-mastiff" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><pre>$ mas.py ooxml_file(s) ...</pre>
+</div>
+<p>Output can be found in the /path/to/mastiff-source-files/work/log
+directory.</p>
+<p>If MASTIFF is not being run from the MASTIFF source directory, the user
+must specify the location of mastiff.conf using the -c flag. Eg.</p>
+<div class="highlight-python"><pre>$ mas.py -c /path/to/mastiff/mastiff.conf ooxml_files(s) ...</pre>
+</div>
+<p>Also note that if mastiff.conf is using the default settings, MASTIFF
+will run only if the current working directory is the MASTIFF source
+directory. Otherwise, specify location of the plugins directory in
+mastiff.conf.</p>
+</div>
+<div class="section" id="plugin-architecture">
+<h2>Plugin Architecture<a class="headerlink" href="#plugin-architecture" title="Permalink to this headline">¶</a></h2>
+<p>The architecture to create OfficeDissector plugins is located at:
+mastiff-plugins/Office-officedissector-skel.py See the beginning of that
+file for instructions for creating OfficeDissector plugins.</p>
+</div>
+<div class="section" id="example-plugins">
+<h2>Example Plugins<a class="headerlink" href="#example-plugins" title="Permalink to this headline">¶</a></h2>
+<p>There are three sample plugins:</p>
+</div>
+<div class="section" id="office-officedissector-multimedia-py">
+<h2>1. Office-officedissector-multimedia.py<a class="headerlink" href="#office-officedissector-multimedia-py" title="Permalink to this headline">¶</a></h2>
+<p>To see this plugin run, use:</p>
+<div class="highlight-python"><pre>$ mas.py -p 'OfficeDissector Extract Multimedia' /path/to/officedissector/test/unit_test/testdocs/037027.pptx</pre>
+</div>
+<p>MASTIFF stores results in a folder with path work/log/[md5sum of file]/.</p>
+<p>To find the multimedia parts, use:</p>
+<div class="highlight-python"><pre>$ ls work/log/8aeb72b3751238a37aff319585434327/parts</pre>
+</div>
+</div>
+<div class="section" id="office-officedissector-urls-py">
+<h2>2. Office-officedissector-urls.py<a class="headerlink" href="#office-officedissector-urls-py" title="Permalink to this headline">¶</a></h2>
+<p>To see this plugin run, use:</p>
+<div class="highlight-python"><pre>$ mas.py -p 'OfficeDissector Extract URLs' /path/to/officedissector/test/unit_test/testdocs/037027.pptx</pre>
+</div>
+<p>To find the URLs, use:</p>
+<div class="highlight-python"><pre>$ cat work/log/8aeb72b3751238a37aff319585434327/urls.txt</pre>
+</div>
+</div>
+<div class="section" id="office-officedissector-embedded-code-py">
+<h2>3. Office-officedissector-embedded-code.py<a class="headerlink" href="#office-officedissector-embedded-code-py" title="Permalink to this headline">¶</a></h2>
+<p>To see this plugin run, use:</p>
+<div class="highlight-python"><pre>$ mas.py -p 'OfficeDissector Extract Embedded Code' /path/to/officedissector/test/unit_test/testdocs/macros.xlsm</pre>
+</div>
+<p>To find the embedded code parts, use:</p>
+<div class="highlight-python"><pre>$ ls work/log/39c7ca586fefb547b8d7474130ec0fe5/parts</pre>
+</div>
+</div>
+<div class="section" id="plugin-tests">
+<h2>Plugin Tests<a class="headerlink" href="#plugin-tests" title="Permalink to this headline">¶</a></h2>
+<p>To test, first install the plugins as mentioned above. Then:</p>
+<p># Functional tests</p>
+<div class="highlight-python"><pre>$ cd test/unit_test $ python test_plugins.py PATH_TO_MASTIFF_SOURCE_DIR</pre>
+</div>
+<p># Performance tests</p>
+<div class="highlight-python"><pre>$ cd test $ python test_plugin_performance.py PATH_TO_MASTIFF_SOURCE_DIR</pre>
+</div>
+<p>Note that the tests assume that MASTIFF will output results in
+PATH_TO_MASTIFF_SOURCE_DIR. If you have configured MASTIFF to output
+results to the current directory, you may need to specify that instead:</p>
+<div class="highlight-python"><pre>$ cd test/unit_test $ python test_plugins.py . # If MASTIFF is configured to output results to the current directory</pre>
+</div>
+<p>For accurate performance results:</p>
+<ol class="arabic simple">
+<li>Disable Zip feedback in mastiff.conf: [ZipExtract] feedback = off.</li>
+<li>Remove all other plugins outside the MASTIFF source directory,
+especially the ZIP plugins.</li>
+<li>Remove the Office-officedissector-skel plugin from plugins/Office.</li>
+</ol>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">OfficeDissector MASTIFF Plugin README</a><ul>
+<li><a class="reference internal" href="#install-mastiff">Install MASTIFF</a></li>
+<li><a class="reference internal" href="#configuring-mastiff">Configuring MASTIFF</a></li>
+<li><a class="reference internal" href="#install-officedissector-plugins">Install OfficeDissector Plugins</a></li>
+<li><a class="reference internal" href="#run-mastiff">Run MASTIFF</a></li>
+<li><a class="reference internal" href="#plugin-architecture">Plugin Architecture</a></li>
+<li><a class="reference internal" href="#example-plugins">Example Plugins</a></li>
+<li><a class="reference internal" href="#office-officedissector-multimedia-py">1. Office-officedissector-multimedia.py</a></li>
+<li><a class="reference internal" href="#office-officedissector-urls-py">2. Office-officedissector-urls.py</a></li>
+<li><a class="reference internal" href="#office-officedissector-embedded-code-py">3. Office-officedissector-embedded-code.py</a></li>
+<li><a class="reference internal" href="#plugin-tests">Plugin Tests</a></li>
+</ul>
+</li>
+</ul>
+
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/rst/mastiff-readme.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../index.html">OfficeDissector 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013-2015 Grier Forensics.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b1.
+    </div>
+  </body>
+</html>

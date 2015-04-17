@@ -1,0 +1,185 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>rel – OfficeDissector - Relationship Class &mdash; OfficeDissector 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="OfficeDissector 1.0 documentation" href="../index.html" />
+    <link rel="up" title="OfficeDissector API Documentation" href="api.html" />
+    <link rel="next" title="zip – OfficeDissector - Zip Class" href="zip.html" />
+    <link rel="prev" title="part – OfficeDissector - Part Class" href="part.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="zip.html" title="zip – OfficeDissector - Zip Class"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="part.html" title="part – OfficeDissector - Part Class"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">OfficeDissector 1.0 documentation</a> &raquo;</li>
+          <li><a href="api.html" accesskey="U">OfficeDissector API Documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="module-officedissector.rel">
+<span id="rel-officedissector-relationship-class"></span><h1><tt class="xref py py-mod docutils literal"><span class="pre">rel</span></tt> &#8211; OfficeDissector - Relationship Class<a class="headerlink" href="#module-officedissector.rel" title="Permalink to this headline">¶</a></h1>
+<p>A Relationship in an OOXML Document.</p>
+<dl class="class">
+<dt id="officedissector.rel.Relationship">
+<em class="property">class </em><tt class="descclassname">officedissector.rel.</tt><tt class="descname">Relationship</tt><big>(</big><em>source</em>, <em>type</em>, <em>id</em>, <em>target</em>, <em>target_part</em>, <em>is_external</em><big>)</big><a class="headerlink" href="#officedissector.rel.Relationship" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <a class="reference internal" href="#officedissector.rel.Relationship" title="officedissector.rel.Relationship"><tt class="xref py py-class docutils literal"><span class="pre">Relationship</span></tt></a> in an OOXML Document.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Variables:</th><td class="field-body"><ul class="first last simple">
+<li><strong>source</strong> &#8211; The source of a Relationship.
+For example, a Relationship in the
+&#8216;/word/_rels/document.xml.rels&#8217; Part has the
+source: &#8216;/word/document.xml&#8217;. For Relationships in the
+&#8216;/_rels/.rels&#8217; Part, the source is the virtual
+root part, or RootPart.</li>
+<li><strong>type</strong> &#8211; The Type of a Relationship. For example, the
+Relationship with the Target &#8216;/word/document.xml&#8217;
+is Type: &#8216;<a class="reference external" href="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument">http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument</a>&#8216;</li>
+<li><strong>id</strong> &#8211; The unique ID for this Relationship object. Note that the ID is
+unique only in that particular .rels file. The ID may be reused in
+another .rels file.</li>
+<li><strong>target</strong> &#8211; The URI of the relationship&#8217;s target (e.g. footnotes.xml)</li>
+<li><strong>target_part</strong> &#8211; A reference to the target Part object.</li>
+<li><strong>is_external</strong> &#8211; True if the Target of the Relationship refers to
+an external resource (eg. a hyperlink).</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="officedissector.rel.Relationship.__init__">
+<tt class="descname">__init__</tt><big>(</big><em>source</em>, <em>type</em>, <em>id</em>, <em>target</em>, <em>target_part</em>, <em>is_external</em><big>)</big><a class="headerlink" href="#officedissector.rel.Relationship.__init__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="officedissector.rel.Relationship.to_json">
+<tt class="descname">to_json</tt><big>(</big><big>)</big><a class="headerlink" href="#officedissector.rel.Relationship.to_json" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export this object to JSON.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">a JSON encoded string</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="officedissector.rel.Relationship.to_reference">
+<tt class="descname">to_reference</tt><big>(</big><big>)</big><a class="headerlink" href="#officedissector.rel.Relationship.to_reference" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a string which uniquely identifies this object.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">a string which uniquely identifies this object</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="part.html"
+                        title="previous chapter"><tt class="docutils literal"><span class="pre">part</span></tt> &#8211; OfficeDissector - Part Class</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="zip.html"
+                        title="next chapter"><tt class="docutils literal"><span class="pre">zip</span></tt> &#8211; OfficeDissector - Zip Class</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/rst/rel.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="zip.html" title="zip – OfficeDissector - Zip Class"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="part.html" title="part – OfficeDissector - Part Class"
+             >previous</a> |</li>
+        <li><a href="../index.html">OfficeDissector 1.0 documentation</a> &raquo;</li>
+          <li><a href="api.html" >OfficeDissector API Documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013-2015 Grier Forensics.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b1.
+    </div>
+  </body>
+</html>

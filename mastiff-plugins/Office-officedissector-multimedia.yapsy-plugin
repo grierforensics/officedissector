@@ -1,0 +1,7 @@
+[Core]
+Name = OfficeDissector Extract Multimedia 
+Module = Office-officedissector-multimedia
+
+[Documentation]
+Description = Extract multimedia parts from OOXML document using OfficeDissector
+Author = Brandon Gordon - Grier Forensics

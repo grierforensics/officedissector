@@ -1,0 +1,179 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>features – OfficeDissector - Features Class &mdash; OfficeDissector 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="OfficeDissector 1.0 documentation" href="../index.html" />
+    <link rel="up" title="OfficeDissector API Documentation" href="api.html" />
+    <link rel="next" title="core_properties – OfficeDissector - CoreProperties Class" href="core_properties.html" />
+    <link rel="prev" title="zip – OfficeDissector - Zip Class" href="zip.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="core_properties.html" title="core_properties – OfficeDissector - CoreProperties Class"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="zip.html" title="zip – OfficeDissector - Zip Class"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">OfficeDissector 1.0 documentation</a> &raquo;</li>
+          <li><a href="api.html" accesskey="U">OfficeDissector API Documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="module-officedissector.features">
+<span id="features-officedissector-features-class"></span><h1><tt class="xref py py-mod docutils literal"><span class="pre">features</span></tt> &#8211; OfficeDissector - Features Class<a class="headerlink" href="#module-officedissector.features" title="Permalink to this headline">¶</a></h1>
+<p>Provides access to all Features of a Document.</p>
+<dl class="class">
+<dt id="officedissector.features.Features">
+<em class="property">class </em><tt class="descclassname">officedissector.features.</tt><tt class="descname">Features</tt><big>(</big><em>doc</em><big>)</big><a class="headerlink" href="#officedissector.features.Features" title="Permalink to this definition">¶</a></dt>
+<dd><p>Provide access to all <a class="reference internal" href="#officedissector.features.Features" title="officedissector.features.Features"><tt class="xref py py-class docutils literal"><span class="pre">Features</span></tt></a> of a <a class="reference internal" href="doc.html#officedissector.doc.Document" title="officedissector.doc.Document"><tt class="xref py py-class docutils literal"><span class="pre">Document</span></tt></a>.</p>
+<p>Features in an OOXML document are identified in two ways:</p>
+<ol class="arabic simple">
+<li>By their Content-Type</li>
+<li>By their inbound Relationship types</li>
+</ol>
+<p>For completeness, we use either means of identification,
+allowing either one to identify a feature.</p>
+<p>For example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">part</span> <span class="o">=</span> <span class="n">doc</span><span class="o">.</span><span class="n">part_by_name</span><span class="p">[</span><span class="s">&#39;/word/media/image1.jpeg&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">part</span><span class="o">.</span><span class="n">content_type</span><span class="p">()</span>
+<span class="go">&#39;image/jpeg&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">part</span><span class="o">.</span><span class="n">relationships_in</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">type</span>
+<span class="go">&#39;http://schemas.openxmlformats.org/officeDocument/2006/relationships/image&#39;</span>
+</pre></div>
+</div>
+<p>Content-Types and Relationships are mainly referenced from the OOXML
+specifications at <a class="reference external" href="http://standards.iso.org/ittf/PubliclyAvailableStandards/c061750_ISO_IEC_29500-1_2012.zip">ISO/IEC:29500-1</a> 15.2 and <a class="reference external" href="http://standards.iso.org/ittf/PubliclyAvailableStandards/c061796_ISO_IEC_29500-2_2012_Electronic_inserts.zip">ISO/IEC:29500-2</a> 13.2.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Variables:</th><td class="field-body"><ul class="first last simple">
+<li><strong>custom_properties</strong> &#8211; </li>
+<li><strong>images</strong> &#8211; </li>
+<li><strong>videos</strong> &#8211; </li>
+<li><strong>sounds</strong> &#8211; </li>
+<li><strong>fonts</strong> &#8211; </li>
+<li><strong>macros</strong> &#8211; </li>
+<li><strong>comments</strong> &#8211; </li>
+<li><strong>custom_xml</strong> &#8211; </li>
+<li><strong>embedded_controls</strong> &#8211; </li>
+<li><strong>embedded_objects</strong> &#8211; </li>
+<li><strong>embedded_packages</strong> &#8211; </li>
+<li><strong>digital_signatures</strong> &#8211; </li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="officedissector.features.Features.__init__">
+<tt class="descname">__init__</tt><big>(</big><em>doc</em><big>)</big><a class="headerlink" href="#officedissector.features.Features.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize the Features object.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>doc</strong> (<a class="reference internal" href="doc.html#officedissector.doc.Document" title="officedissector.doc.Document"><tt class="xref py py-class docutils literal"><span class="pre">Document</span></tt></a>) &#8211; the <a class="reference internal" href="doc.html#officedissector.doc.Document" title="officedissector.doc.Document"><tt class="xref py py-class docutils literal"><span class="pre">Document</span></tt></a> associated with this object</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="zip.html"
+                        title="previous chapter"><tt class="docutils literal"><span class="pre">zip</span></tt> &#8211; OfficeDissector - Zip Class</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="core_properties.html"
+                        title="next chapter"><tt class="docutils literal"><span class="pre">core_properties</span></tt> &#8211; OfficeDissector - CoreProperties Class</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/rst/features.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="core_properties.html" title="core_properties – OfficeDissector - CoreProperties Class"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="zip.html" title="zip – OfficeDissector - Zip Class"
+             >previous</a> |</li>
+        <li><a href="../index.html">OfficeDissector 1.0 documentation</a> &raquo;</li>
+          <li><a href="api.html" >OfficeDissector API Documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013-2015 Grier Forensics.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b1.
+    </div>
+  </body>
+</html>

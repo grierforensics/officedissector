@@ -1,0 +1,83 @@
+Analyzing OOXML
+===============
+
+OOXML files can be thought of at six levels of abstraction:
+
+-  As a file
+-  As a Zip archive
+-  As a set of Parts (a Part has a *name* and an array of data bytes
+   called a *stream*)
+-  As a set of Parts with data in well defined formats (usually XML)
+-  As a graph of Parts, connected by Relationships, and having
+   associated metadata (specifically Content-Type)
+-  As a document with Features and CoreProperties
+
+Each abstraction level completely contains all the levels beneath it;
+there are no leaks. That is, all Features are implemented as
+Parts & Relationships, all Parts are contained in the Zip file, etc. This
+concept will be explained more below.
+
+Different types of analysis can be done at each of these levels.
+
+File
+----
+
+At its simplest, an OOXML file is a single file; that is, a filename and
+a sequence of bytes. OfficeDissector's Document class takes this file
+and exposes its deeper content:
+
+::
+
+    import officedissector
+    doc = officedissector.doc.Document('test/fraunhoferlibrary/Artikel.docx') # Returns a Document object
+
+Note that the filename's extension is signficant and affects the
+behavior of Microsoft Office. Member variables ``doc.type``,
+``doc.is_macro_enabled`` and ``doc.is_template`` expose the meaning of
+the filename extension.
+
+Zip file
+--------
+
+An OOXML file is a Zip archive (each member of this archive is called a
+Part, described below). Method `:func:officedissector.doc.zip` provides a Zip object which
+provides access at this level of abstraction. However, most analysis is
+best performed at the deeper levels of abstraction below.
+
+Part
+----
+
+Parts are the heart of OOXML. **The entire Document is defined by its
+Parts** (other than the limited information provided by the filename's
+extension and Zip metadata described above). Even the Parts' own
+metadata is stored in Parts (as will be described below). Thus,
+**analyzing OOXML is about analyzing Parts**.
+
+``Document.parts`` provides a list of all Parts in the document.
+
+At their simplest level, Parts have only two properties: a \_a *name*
+(exposed through ``Part.name``) and an array of data bytes called a
+*stream* (exposed through ``Part.stream()``).
+
+::
+
+    for p in doc.parts:
+        print p.name # p.name returns a String
+        print p.stream().read(10) # p.stream() returns a File-like object
+
+XML Parts
+---------
+
+Most Parts are in XML format. OfficeDissector will parse the XML for
+you, using the ``Part.xml()`` method, or perform XPath queries
+(recommended), using the ``Part.xpath()`` method.
+
+Content-Type
+------------
+
+Relationshos
+------------
+
+Features and CoreProperties
+---------------------------
+

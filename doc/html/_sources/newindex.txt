@@ -1,0 +1,72 @@
+.. OfficeDissector documentation master file, created by
+   sphinx-quickstart on Mon Sep 16 00:21:42 2013.
+   You can adapt this file completely to your liking, but it should at least
+   contain the root `toctree` directive.
+
+OfficeDissector 
+===============
+
+.. contents::
+    :local:
+    :depth: 1
+
+
+OfficeDissector is a parser library for static security analysis of
+Office Open XML (OOXML) Documents, created by Grier Forensics for the
+Cyber System Assessments Group at MIT's Lincoln Laboratory.
+
+OfficeDissector is the first parser designed specifically for security
+analysis of OOXML documents. It exposes all internals, including
+document properties, parts, content-type, relationships, embedded macros
+and multimedia, and comments, and more. It provides full JSON export,
+and a MASTIFF based plugin architecture. It also includes a nearly 600
+MB test corpus, unit tests with nearly 100% coverage, smoke tests
+running against the entire corpus, and simple, well factored, fully
+commented code.
+
+Install
+------------
+See :doc:`Installing OfficeDissector <rst/install>` for how to install and test OfficeDissector.
+
+
+Usage Examples
+--------------
+
+The best way to learn OfficeDissector is to look at the :doc:`interactive ipython session demonstrating usage of OfficeDissector <rst/usage>`.
+
+
+Analyzing OOXML
+---------------
+
+See :doc:`Analyzing OOXML with Office Dissector <rst/ANALYZING_OOXML>` for a quick start guide on how to
+use OfficeDissector to analyze OOXML documents.
+
+Plugin Architecture
+-------------------
+
+To find more information about the MASTIFF plugin architecture and sample
+plugins, see :doc:`mastiff-plugins/README.txt <rst/mastiff-readme>`.
+
+API Documentation
+-----------------------------------
+
+OfficeDissector's API is fully documented in the :doc:`API documentation <rst/api>`:
+
+.. toctree::
+    :maxdepth: 2
+
+    API <rst/api>
+
+Miscellaneous
+------------------------
+
+.. toctree::
+    :maxdepth: 2
+
+    XML Namespaces <rst/namespaces>
+    Document Dimensions <rst/document_dimensions>
+    Legal Information <rst/legal>
+
+* :ref:`genindex`
+* :ref:`modindex`
+* :ref:`search`
