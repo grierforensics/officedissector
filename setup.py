@@ -7,5 +7,4 @@ setup(
     author_email='jdgrier@grierforensics.com',
     description="""OfficeDissector is a parser library for static security analysis of OOXML documents.""",
     name='officedissector',
-    packages=['officedissector'],
-    install_requires=['lxml'])
+    packages=['officedissector'])
