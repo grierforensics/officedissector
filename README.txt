@@ -189,3 +189,6 @@ OfficeDissector to analyze OOXML documents.
 ## API
 
 For more details about OfficeDissector, see the API - `doc/html/rst/api.html` documentation.
+
+##
+See www.officedissector.com for more information
