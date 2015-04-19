@@ -8,5 +8,5 @@ setup(
     description="""OfficeDissector is a parser library for static security analysis of OOXML documents.""",
     name='officedissector',
     version='0.0.2',
-    url='https://github.com/grierforensics/officedissector',
+    url='http://www.officedissector.com/',
     packages=['officedissector'])
