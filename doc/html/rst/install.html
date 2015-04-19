@@ -47,14 +47,21 @@
             
   <div class="section" id="installing-officedissector">
 <h1>Installing OfficeDissector<a class="headerlink" href="#installing-officedissector" title="Permalink to this headline">¶</a></h1>
-<p>OfficeDissector requires the lxml package and Python version 2.7. OfficeDissector can be installed using pip (recommended) or python
-setup:</p>
+<p>OfficeDissector requires Python 2.7 and the lxml package.</p>
+<p>The easiest way to install OfficeDissector is to use pip to automatically download and install it:</p>
+
+<div class="highlight-python"><pre>$ sudo pip install lxml # If you haven't installed lxml already
+$ sudo pip install officedissector
+</div>
+<p>Alternatively, you can download OfficeDissector from <a href="https://github.com/grierforensics/officedissector">github</a> or
+as a <a href="https://github.com/grierforensics/officedissector/archive/master.zip">zip</a> and install your local copy, using either  pip (recommended) or python setup:</p>
+
 <div class="highlight-python"><pre>$ sudo pip install /path/to/thisfolder # Recommended, as pip supports uninstall
 $ sudo python setup.py install # Alternative</pre>
 </div>
-<p>Alternatively, to use OfficeDissector without installing it, set the <tt class="docutils literal"><span class="pre">PYTHONPATH</span></tt> to
-the <tt class="docutils literal"><span class="pre">officedissector</span></tt> directory:</p>
-<div class="highlight-python"><pre>$ export PYTHONPATH=/path/to/thisfolder</pre>
+Finally, to use OfficeDissector without installing it, download it and set the <tt class="docutils literal"><span class="pre">PYTHONPATH</span></tt> to the <tt class="docutils literal"><span class="pre">off$
+<div class="highlight-python"><pre>$ export PYTHONPATH=/path/to/thisfolder
+</pre>
 </div>
 </div>
 <div class="section" id="documentation">

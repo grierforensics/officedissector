@@ -60,14 +60,21 @@ running against the entire corpus, and simple, well factored, fully
 commented code</p>
 <div class="section" id="install">
 <h2>Install<a class="headerlink" href="#install" title="Permalink to this headline">¶</a></h2>
-<p>OfficeDissector requires the lxml package and Python version 2.7. To use OfficeDissector without installing it, set the <tt class="docutils literal"><span class="pre">PYTHONPATH</span></tt> to
-the <tt class="docutils literal"><span class="pre">officedissector</span></tt> directory:</p>
-<div class="highlight-python"><pre>$ export PYTHONPATH=/path/to/thisfolder</pre>
+<p>OfficeDissector requires Python 2.7 and the lxml package.</p>
+<p>The easiest way to install OfficeDissector is to use pip to automatically download and install it:</p>
+
+<div class="highlight-python"><pre>$ sudo pip install lxml # If you haven't installed lxml already
+$ sudo pip install officedissector
 </div>
-<p>Alternatively, it can be installed using pip (recommended) or python
-setup:</p>
+<p>Alternatively, you can download OfficeDissector from <a href="https://github.com/grierforensics/officedissector">github</a> or 
+as a <a href="https://github.com/grierforensics/officedissector/archive/master.zip">zip</a> and install your local copy, using either  pip (recommended) or python setup:</p>
+
 <div class="highlight-python"><pre>$ sudo pip install /path/to/thisfolder # Recommended, as pip supports uninstall
 $ sudo python setup.py install # Alternative</pre>
+</div>
+Finally, to use OfficeDissector without installing it, download it and set the <tt class="docutils literal"><span class="pre">PYTHONPATH</span></tt> to the <tt class="docutils literal"><span class="pre">officedissector</span></tt> directory:
+<div class="highlight-python"><pre>$ export PYTHONPATH=/path/to/thisfolder
+</pre>
 </div>
 </div>
 <div class="section" id="documentation">
@@ -232,13 +239,12 @@ Out[68]: '2009-12-04T14:47:00Z'</pre>
 </div>
 <div class="section" id="analyzing-ooxml">
 <h2>Analyzing OOXML<a class="headerlink" href="#analyzing-ooxml" title="Permalink to this headline">¶</a></h2>
-<p>See <a class="reference internal" href="ANALYZING_OOXML.html"><em>ANALYZING_OOXML.txt</em></a> for a quick start guide on how to use OfficeDissector to analyze OOXML documents.</p>  
+<p>See <a class="reference internal" href="ANALYZING_OOXML.html"><em>ANALYZING_OOXML.txt</em></a> for a quick start guide on how to use OfficeDissector to analyze OOXML documents.</p>
 </div>
 </div>
 <div class="section" id="api">
 <h2>API<a class="headerlink" href="#api" title="Permalink to this headline">¶</a></h2>
 <p>For more details about OfficeDissector, see the API - <a class="reference internal" href="rst/api.html"><em>rst/api.html</em></a> documentation.</p>
-
 </div>
 <div class="section" id="more-information">
 <h2>More Information<a class="headerlink" href="#more-information" title="Permalink to this headline"></a></h2>
