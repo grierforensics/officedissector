@@ -213,3 +213,8 @@ API
 ---
 
 For more details about OfficeDissector, see the :doc:`API <rst/api>` documentation.
+
+More Information
+----------------
+
+See http://www.grierforensics.com/ for more information on the project.
