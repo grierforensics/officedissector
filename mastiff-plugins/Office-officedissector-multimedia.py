@@ -22,7 +22,7 @@ import os
 
 from zipfile import BadZipfile
 
-import mastiff.category.office as office
+import mastiff.plugins.category.office as office
 import officedissector
 
 class OfficeDissectorSkel(office.OfficeCat):
