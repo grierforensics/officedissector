@@ -7,7 +7,7 @@ __email__ = 'bgordon@grierforensics.com'
 
 import json
 import base64
-import StringIO
+import io
 
 from lxml import etree
 from types import *
@@ -53,7 +53,7 @@ class Part(object):
         try:
             xml_etree = etree.parse(self.stream())
         except etree.XMLSyntaxError:
-            print 'part cannot be parsed successfully: %r' % self
+            print('part cannot be parsed successfully: %r' % self)
             raise
         return xml_etree
 
@@ -191,7 +191,7 @@ class Part(object):
         try:
             json.loads(json_str)
         except ValueError:
-            print 'json_str is not valid JSON'
+            print('json_str is not valid JSON')
             raise
 
         return json_str
@@ -216,7 +216,7 @@ class RootPart(Part):
 
         :return: empty stream
         """
-        return StringIO.StringIO()
+        return io.StringIO()
 
     def xml(self):
         """
