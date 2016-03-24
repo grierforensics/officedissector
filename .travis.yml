@@ -1,0 +1,32 @@
+language: python
+
+sudo: required
+
+dist: trusty
+
+python:
+    - "2.7"
+    - "3.3"
+    - "3.4"
+    - "3.5"
+    - "nightly"
+
+install:
+    # MASTIFF is required for the tests
+    - git clone https://github.com/Rafiot/mastiff.git
+    - pushd mastiff
+    - pip install -U pip setuptools python-magic yapsy simplejson
+    - make install
+    - make test
+    - popd
+    - pip install coveralls
+    - pip install codecov
+    - python setup.py -q install
+
+script:
+    - if [ $(python -c 'import sys; print(sys.version_info.major)') == '2' ]; then mas.py -h ; fi
+    - nosetests --with-coverage --cover-package=officedissector -v
+
+after_success:
+    - coveralls
+    - codecov
