@@ -72,7 +72,7 @@ class Document(object):
         try:
             self.type, self.is_macro_enabled, self.is_template = FILE_EXTS[ext]
         except KeyError:
-            print 'File extension is not an OOXML file type: %s' % ext
+            print('File extension is not an OOXML file type: %s' % ext)
             raise
 
         # Provide list and dictionary of all Parts in :class:`Document`
@@ -216,7 +216,7 @@ class Document(object):
         try:
             json.loads(json_str)
         except ValueError:
-            print 'json_str is not valid JSON'
+            print('json_str is not valid JSON')
             raise
         return json_str
 
@@ -258,7 +258,7 @@ class Document(object):
                     try:
                         source = self.part_by_name[sourcepath]
                     except KeyError:
-                        print 'sourcepath is not a valid Part: %s' % sourcepath
+                        print('sourcepath is not a valid Part: %s' % sourcepath)
                         raise
 
                 reltype = rel.attrib['Type']
@@ -288,7 +288,7 @@ class Document(object):
                     try:
                         target_part = self.part_by_name[target_path]
                     except KeyError:
-                        print 'target_path is not a valid Part: %s' % target_path
+                        print('target_path is not a valid Part: %s' % target_path)
                         raise
 
                 newrelobj = Relationship(source, reltype, relid, target, target_part, is_external)
