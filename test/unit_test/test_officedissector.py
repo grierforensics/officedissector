@@ -273,9 +273,10 @@ class PackageTest(unittest.TestCase):
             Document('testdocs/bad_extension.doc')
             self.assertEqual(self.test_stdout.getvalue(),
                              'File extension is not an OOXML file type')
-        with self.assertRaisesRegexp(AssertionError,
-                                     'content_type of Part is empty'):
-            Document('testdocs/missing_content_type.docx')
+        # Skip this test: The document doesn't follow the spec, but is still openable
+        # with self.assertRaisesRegexp(AssertionError,
+        #                             'content_type of Part is empty'):
+        #    Document('testdocs/missing_content_type.docx')
         with self.assertRaises(KeyError):
             Document('testdocs/missing_part.docx')
             self.assertEqual(self.test_stdout.getvalue(),
