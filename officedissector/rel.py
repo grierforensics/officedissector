@@ -65,7 +65,7 @@ class Relationship(object):
         try:
             json.loads(json_str)
         except ValueError:
-            print 'json_str is not valid JSON'
+            print('json_str is not valid JSON')
             raise
         return json_str
 
