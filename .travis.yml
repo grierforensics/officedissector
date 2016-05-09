@@ -12,19 +12,25 @@ python:
     - "nightly"
 
 install:
-    # MASTIFF is required for the tests
-    - git clone https://github.com/Rafiot/mastiff.git
-    - pushd mastiff
-    - pip install -U pip setuptools python-magic yapsy simplejson
-    - make install
-    - make test
-    - popd
+    - if [[ "$TRAVIS_PYTHON_VERSION" == "2.7" ]]; then
+        # MASTIFF is required for the tests
+        git clone https://github.com/Rafiot/mastiff.git
+        pushd mastiff
+        pip install -U pip setuptools python-magic yapsy simplejson
+        make install
+        make test
+        popd
+      fi
     - pip install coveralls
     - pip install codecov
     - python setup.py -q install
+    - pushd test/fraunhoferlibrary
+    - wget http://www.officedissector.com/corpus/fraunhoferlibrary.zip
+    - unzip -o fraunhoferlibrary.zip
+    - popd
 
 script:
-    - if [ $(python -c 'import sys; print(sys.version_info.major)') == '2' ]; then mas.py -h ; fi
+    - if [[ "$TRAVIS_PYTHON_VERSION" == "2.7" ]]; then mas.py -h ; fi
     - nosetests --with-coverage --cover-package=officedissector -v
 
 after_success:
