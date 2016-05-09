@@ -12,7 +12,8 @@ python:
     - "nightly"
 
 install:
-    - if [[ "$TRAVIS_PYTHON_VERSION" == "2.7" ]]; then
+    - |
+      if [[ "$TRAVIS_PYTHON_VERSION" == "2.7" ]]; then
         # MASTIFF is required for the tests
         git clone https://github.com/Rafiot/mastiff.git
         pushd mastiff
