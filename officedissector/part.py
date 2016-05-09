@@ -117,9 +117,11 @@ class Part(object):
                           self.name.rsplit('.', 1)[1].strip('.') +
                           '"]/@ContentType')
             result2 = content_types.xpath(xpath_qry2, ct_nsmap)
-            # When this second XPath result is also empty, this Part has no content_type
-            assert len(result2), 'content_type of Part is empty: %r' % self
-            self.__content_type = result2[0]
+            if not result2:
+                # When this second XPath result is also empty, this Part has no content_type
+                self.__content_type = ''
+            else:
+                self.__content_type = result2[0]
 
         return self.__content_type
 
