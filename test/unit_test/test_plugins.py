@@ -22,9 +22,10 @@ class PluginTest(unittest.TestCase):
                 'testdocs/url.docx',
                 'testdocs/test.docx',
                 'testdocs/macros2.xlsm']
-        print('Running MASTIFF plugins on test documents...')
-        for doc in docs:
-            cls.run_mastiff(doc)
+        if (sys.version_info < (3, 0)):
+            print('Running MASTIFF plugins on test documents...')
+            for doc in docs:
+                cls.run_mastiff(doc)
 
     # DEV-08.1
     @unittest.skip("MASTIFF not supported in python 3.*, broken in python2")

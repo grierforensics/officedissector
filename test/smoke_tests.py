@@ -25,8 +25,8 @@ class SmokeTest(unittest.TestCase):
                 if os.path.isfile(file_):
                     files.append(file_)
 
-        log = codecs.open('smoke_tests.log', 'w', encoding='utf-8')
-        errorlog = codecs.open('smoke_tests_error.log', 'w', encoding='utf-8')
+        log = codecs.open('smoke_tests.log', 'w', encoding='utf-8', errors="surrogateescape")
+        errorlog = codecs.open('smoke_tests_error.log', 'w', encoding='utf-8', errors="surrogateescape")
 
         # Write error log header
         errorlog.write('Three files from govdocs (govdocs/641559.docx, govdocs/500968.xlsx, and\n'
@@ -36,18 +36,22 @@ class SmokeTest(unittest.TestCase):
                        'No other error messages should appear here.\n\n\n')
 
         for docfile in files:
-            print('\nTesting %s...' % docfile)
-            log.write('\nTesting %s...\n' % docfile)
+            if (sys.version_info < (3, 0)):
+                to_print = docfile.decode('utf8', 'replace')
+            else:
+                to_print = docfile
+            print('\nTesting %s...' % to_print)
+            log.write('\nTesting %s...\n' % to_print)
             try:
                 doc1 = Document(docfile)
             except ZipCRCError:
-                msg = 'Error: Bad CRC for file: %s\n' % docfile
+                msg = 'Error: Bad CRC for file: %s\n' % to_print
                 print(msg)
                 log.write(msg)
                 errorlog.write(msg)
                 continue
             except Exception as e:
-                msg = 'Error: File: %s: %s - %s\n' % (docfile, sys.exc_info()[0].__name__, e)
+                msg = 'Error: File: %s: %s - %s\n' % (to_print, sys.exc_info()[0].__name__, e)
                 print(msg)
                 log.write(msg)
                 errorlog.write(msg)
