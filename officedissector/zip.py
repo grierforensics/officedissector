@@ -16,7 +16,9 @@ class Zip(object):
     An interface to the OOXML Document as a Zip file,
     and a lightweight wrapper around the `ZipFile` module.
 
-    :ivar filepath: Path to the Zip (OOXML) file.
+    :ivar pseudofile: Pseudofile of the Zip (OOXML) file.
+
+    :ivar filename: The filename of the Zip (OOXML) file.
 
     :ivar zippartsinfo: A list containing a `ZipInfo` object for each
         member of the Zip file. The `ZipInfo` object contains all
@@ -25,15 +27,19 @@ class Zip(object):
     :ivar comment: The comment text associated with the Zip file.
     """
 
-    def __init__(self, filepath):
+    def __init__(self, pseudofile, filename):
         """
         Initialize zip attributes.
 
-        :param filepath: the path to the OOXML Document
-        :type filepath: string
+        :param pseudofile:  Pseudofile of the document
+        :type pseudofile: os.BytesIO
+
+        :param filename: filename of the document
+        :type filename: string
         """
-        self.filepath = filepath
-        self._zipobj = zipfile.ZipFile(self.filepath, 'r')
+        self.pseudofile = pseudofile
+        self.filename = filename
+        self._zipobj = zipfile.ZipFile(self.pseudofile, 'r')
 
         self.zippartsinfo = self._zipobj.infolist()
 
@@ -79,7 +85,7 @@ class Zip(object):
         return self._zipobj.getinfo(partname.lstrip('/'))
 
     def __repr__(self):
-        return "Zip File: %s" % self.filepath
+        return "Zip File: %s" % self.filename
 
 
 class ZipCRCError(Exception):
