@@ -268,6 +268,11 @@ class PackageTest(unittest.TestCase):
             self.assertEqual(doc1.to_json(include_stream=True)[285:325],
                              '     "stream_b64": "PD94bWwgdmVyc2lvbj0i')
 
+    def testPseudoFile(self):
+        with open("testdocs/macros.xlsm", 'rb') as f:
+            pf = BytesIO(f.read())
+            Document(pseudofile=pf, filename='macros.xlsm')
+
     def testBugs(self):
         # Regression test for BUG OXPA-83
         # Make sure Target_Part='NULL', in this case a Relationship with

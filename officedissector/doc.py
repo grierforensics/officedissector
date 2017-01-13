@@ -9,6 +9,7 @@ import os
 import posixpath
 import re
 import json
+from io import BytesIO
 
 from collections import defaultdict
 
@@ -25,6 +26,10 @@ class Document(object):
     A OOXML document.
 
     :ivar filepath: The path to the OOXML document.
+
+    :ivar pseudofile: Pseudofile of the OOXML document.
+
+    :ivar filename: The filename of the OOXML document.
 
     :ivar type: The OOXML document type, eg. Word.
 
@@ -50,7 +55,7 @@ class Document(object):
 
     """
 
-    def __init__(self, filepath):
+    def __init__(self, filepath=None, pseudofile=None, filename=None):
         """
         Initialize attributes. Build collections of Parts
         and Relationships.
@@ -58,17 +63,28 @@ class Document(object):
 
         :param filepath: the path to the document file
         :type filepath: string
-        """
-        self.filepath = filepath
 
-        # Does file exists?
-        with open(filepath):
-            pass
+        :param pseudofile:  Pseudofile of the document
+        :type pseudofile: os.BytesIO
+
+        :param filename: filename of the document
+        :type filename: string
+        """
+        if filepath:
+            self.filepath = filepath
+            self.pseudofile = BytesIO(open(filepath, 'rb').read())
+            self.filename = os.path.basename(self.filepath)
+        elif pseudofile and filename:
+            self.pseudofile = pseudofile
+            self.filename = filename
+        else:
+            print('Please provide a filepath OR a pseudofile AND a filename')
+            raise
 
         # Is file's zip CRC is correct?
         self.zip().testzip()
 
-        filename, ext = os.path.splitext(filepath)
+        filename, ext = os.path.splitext(self.filename)
         try:
             self.type, self.is_macro_enabled, self.is_template = FILE_EXTS[ext]
         except KeyError:
@@ -98,11 +114,11 @@ class Document(object):
 
     def zip(self):
         """
-        Return a Zip object of OOXML located at self.filepath.
+        Return a Zip object of OOXML.
 
         :return: Zip object
         """
-        return Zip(self.filepath)
+        return Zip(self.pseudofile, self.filename)
 
     def parts_by_content_type(self, contype):
         """
@@ -171,7 +187,7 @@ class Document(object):
             return parts[0]
         else:
             raise Exception("Document %s has %s main parts defined; it should have exactly 1" %
-                            (self.filepath, len(parts)))
+                            (self.filename, len(parts)))
 
     def find_relationships_by_type(self, reltype):
         """
@@ -221,7 +237,7 @@ class Document(object):
         return json_str
 
     def __repr__(self):
-        return "Document: %s" % self.filepath
+        return "Document: %s" % self.filename
 
     def _parse_relationships(self):
         """
