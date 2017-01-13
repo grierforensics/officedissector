@@ -9,7 +9,7 @@ import subprocess
 
 def main():
     if len(sys.argv) != 2:
-        print "\nUsage: " + sys.argv[0] + " MASTIFF_SOURCE_DIR\n\n"
+        print("\nUsage: " + sys.argv[0] + " MASTIFF_SOURCE_DIR\n\n")
         sys.exit(1)
 
     mastiff_dir = sys.argv[1]
@@ -43,17 +43,17 @@ def main():
         else:
             # passorfail = '[PASS]'
             passorfail = '[TIME_OK]' # RAM requirements in process of clarification
-        print '[%s: Size:%6.1fKB User:%.2f System:%.2f Maxresident:%.0fKB (%.0fx)]%s' % ((doc, size) + tuple(results) + (results[2]/size, passorfail))
+        print('[%s: Size:%6.1fKB User:%.2f System:%.2f Maxresident:%.0fKB (%.0fx)]%s' % ((doc, size) + tuple(results) + (results[2]/size, passorfail)))
 
     avg_results = [s/num_results for s in sum_results]
-    print '\n\n[Average: User:%.2f System:%.2f Maxresident:%.0fKB]' % tuple(avg_results)
-    print '[Maximum: User:%.2f System:%.2f Maxresident:%.0fKB]\n' % tuple(max_results)
+    print('\n\n[Average: User:%.2f System:%.2f Maxresident:%.0fKB]' % tuple(avg_results))
+    print('[Maximum: User:%.2f System:%.2f Maxresident:%.0fKB]\n' % tuple(max_results))
 
     if failed:
         for fail in failed:
-            print '[FAILED] Document: %s Size: %.1fKB Total time: %.2f' % fail
+            print('[FAILED] Document: %s Size: %.1fKB Total time: %.2f' % fail)
     else:
-        print '[PASSED]\n'
+        print('[PASSED]\n')
 
 
 def run_time_with_mastiff(doc, mastiff_dir, test_dir):
@@ -66,16 +66,16 @@ def run_time_with_mastiff(doc, mastiff_dir, test_dir):
                              stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     except OSError as e:
         if e.errno == os.errno.ENOENT:
-            print '\nmas.py cannot be found.'
-            print 'Please ensure that MASTIFF is installed.'
+            print('\nmas.py cannot be found.')
+            print('Please ensure that MASTIFF is installed.')
             sys.exit(1)
         else:
             raise
     out, err = p.communicate()
     output = err.split('\n')
     if 'Could not read any configuration files' in output[0]:
-        print 'Most likely your argument does not point to'
-        print 'a valid MASTIFF source directory.'
+        print('Most likely your argument does not point to')
+        print('a valid MASTIFF source directory.')
         sys.exit(1)
     time_output = [string for i, string in enumerate(output) if 'maxresident)k' in string][0].split()
     user_time = [string for i, string in enumerate(time_output) if 'user' in string][0].split('user')[0]
