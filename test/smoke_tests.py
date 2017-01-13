@@ -16,7 +16,8 @@ from officedissector.zip import ZipCRCError
 
 class SmokeTest(unittest.TestCase):
     def testDocOpen(self):
-        corpus_path = [u'govdocs/', u'fraunhoferlibrary/']
+        cur_dir = os.path.dirname(os.path.realpath(__file__))
+        corpus_path = [os.path.join(cur_dir, 'govdocs'), os.path.join(cur_dir, 'fraunhoferlibrary')]
         files = []
         for dir_ in corpus_path:
             for f in os.listdir(dir_):
@@ -35,19 +36,19 @@ class SmokeTest(unittest.TestCase):
                        'No other error messages should appear here.\n\n\n')
 
         for docfile in files:
-            print '\nTesting %s...' % docfile
-            log.write(u'\nTesting %s...\n' % docfile)
+            print('\nTesting %s...' % docfile)
+            log.write('\nTesting %s...\n' % docfile)
             try:
                 doc1 = Document(docfile)
             except ZipCRCError:
                 msg = 'Error: Bad CRC for file: %s\n' % docfile
-                print msg
+                print(msg)
                 log.write(msg)
                 errorlog.write(msg)
                 continue
             except Exception as e:
                 msg = 'Error: File: %s: %s - %s\n' % (docfile, sys.exc_info()[0].__name__, e)
-                print msg
+                print(msg)
                 log.write(msg)
                 errorlog.write(msg)
                 continue
@@ -56,49 +57,49 @@ class SmokeTest(unittest.TestCase):
             log.write('  Document is macro enabled: %s\n' % doc1.is_macro_enabled)
             log.write('  Document is a template: %s\n' % doc1.is_template)
 
-            print '  Testing zip.part_info method...'
+            print('  Testing zip.part_info method...')
             log.write('  Testing zip.part_info method...\n')
             log.write('    zip.part_info([Content_Types].xml).file_size: %s\n' %
                       doc1.zip().part_info('[Content_Types].xml').file_size)
             log.write('    zip.part_info([Content_Types].xml).compress_size: %s\n' %
                       doc1.zip().part_info('[Content_Types].xml').compress_size)
-            print '  Done.'
+            print('  Done.')
             log.write('  Done.\n')
 
             second_part = doc1.parts[1]
-            print '  Testing Part: %s' % second_part.name
+            print('  Testing Part: %s' % second_part.name)
             log.write('  Testing Part: %s\n' % second_part.name)
 
             doc_stream = doc1.part_by_name[second_part.name].stream().read(10)
-            print '  Part stream successfully captured.'
+            print('  Part stream successfully captured.')
             log.write('  Part stream successfully captured.\n')
             partxml = doc1.part_by_name[second_part.name].xml()
-            print '  Part XML successfully parsed.'
+            print('  Part XML successfully parsed.')
             log.write('  Part XML successfully parsed.\n')
 
-            print '  Checking doc.xpath method...'
+            print('  Checking doc.xpath method...')
             log.write('  Checking doc.xpath method...\n')
             log.write('    XPath Result: %s\n' %
                       doc1.part_by_name['/[Content_Types].xml'].xpath('*/@ContentType')[0])
-            print '  Done.'
+            print('  Done.')
             log.write('  Done.\n')
 
-            print '  Checking that all Parts can get Content_Type...'
+            print('  Checking that all Parts can get Content_Type...')
             log.write('  Checking that all Parts can get Content_Type...\n')
             for part in doc1.parts:
                 ct = part.content_type()
                 log.write('    Part %s is Content_Type: %s\n' % (part.name, ct))
-            print '  Done.'
+            print('  Done.')
             log.write('  Done.\n')
 
-            print '  Checking that Document has main_part...'
+            print('  Checking that Document has main_part...')
             log.write('  Checking that Document has main_part...\n')
             doc_main = doc1.main_part()
             log.write('    Main Part: %s\n' % doc_main.name)
-            print '  Done.'
+            print('  Done.')
             log.write('  Done.\n')
 
-            print '  Checking all source and target Relationships for each part...'
+            print('  Checking all source and target Relationships for each part...')
             log.write('  Checking all source and target Relationships for each part...\n')
             for part in doc1.parts:
                 rel_in = part.relationships_in()
@@ -107,10 +108,10 @@ class SmokeTest(unittest.TestCase):
                           (part.name, [r.source.name for r in rel_in]))
                 log.write('    Part %s: Relationships out: %s\n' %
                           (part.name, [r.target for r in rel_out]))
-            print '  Done.'
+            print('  Done.')
             log.write('  Done.\n')
 
-            print '  Testing Document methods to find by Part or Relationship...'
+            print('  Testing Document methods to find by Part or Relationship...')
             log.write('  Testing Document methods to find by Part or Relationship...\n')
             log.write('    doc.parts_by_content_type(application/xml): %s\n' %
                       doc1.parts_by_content_type('application/xml')[0])
@@ -120,10 +121,10 @@ class SmokeTest(unittest.TestCase):
                       doc1.parts_by_relationship_type('/relationships/officeDocument')[0].name)
             log.write('    doc.find_relationship_by_type(/relationships/officeDocument).source: %s\n' %
                       doc1.find_relationships_by_type('/relationships/officeDocument')[0].source)
-            print '  Done.'
+            print('  Done.')
             log.write('  Done.\n')
 
-            print '  Checking for all Features...'
+            print('  Checking for all Features...')
             log.write('  Checking for Features...\n')
             for image in doc1.features.images:
                 log.write('    Image: %s\n' % image.name)
@@ -147,10 +148,10 @@ class SmokeTest(unittest.TestCase):
                 log.write('    Embedded Package content: %s\n' % embedded_package.name)
             for digital_signature in doc1.features.digital_signatures:
                 log.write('    Digital Signature content: %s\n' % digital_signature.name)
-            print '  Done.'
+            print('  Done.')
             log.write('  Done.\n')
 
-            print '  Checking Core Properties...'
+            print('  Checking Core Properties...')
             log.write('  Checking Core Properties...\n')
             log.write('    Category: %s\n' % doc1.core_properties.category)
             log.write('    Content status: %s\n' % doc1.core_properties.content_status)
@@ -167,17 +168,17 @@ class SmokeTest(unittest.TestCase):
             log.write('    Subject: %s\n' % doc1.core_properties.subject)
             log.write('    Title: %s\n' % doc1.core_properties.title)
             log.write('    Version: %s\n' % doc1.core_properties.version)
-            print '  Done.'
+            print('  Done.')
             log.write('  Done.\n')
 
-            print '  Checking export to JSON...'
+            print('  Checking export to JSON...')
             log.write('  Checking export to JSON...\n')
             doc_json = doc1.to_json()
             log.write('    Beginning of JSON: %s\n' % doc_json[0:50])
-            print '  Done.'
+            print('  Done.')
             log.write('  Done.\n')
 
-            print 'Done.'
+            print('Done.')
             log.write('Done.\n')
 
         log.close()

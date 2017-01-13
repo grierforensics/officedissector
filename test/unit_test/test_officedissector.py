@@ -8,7 +8,9 @@ __email__ = 'bgordon@grierforensics.com'
 import sys
 import os
 import unittest
-import StringIO
+from io import BytesIO
+from io import StringIO
+import platform
 
 from lxml import etree
 
@@ -19,7 +21,13 @@ from officedissector.part import Part
 
 class PackageTest(unittest.TestCase):
     def setUp(self):
-        sys.stdout = self.test_stdout = StringIO.StringIO()
+        os.chdir(os.path.abspath(os.path.dirname(__file__)))
+        major, minor, hf = platform.python_version_tuple()
+        if int(major) < 3:
+            sys.stdout = BytesIO()
+        else:
+            sys.stdout = StringIO()
+        self.test_stdout = BytesIO()
 
     # DEV-01.1
     def testFileName(self):
@@ -52,7 +60,7 @@ class PackageTest(unittest.TestCase):
     def testZipfileProperties(self):
         doc1 = Document('testdocs/test.docx')
         self.assertEquals(doc1.zip().namelist()[0], '[Content_Types].xml')
-        self.assertEquals(doc1.zip().comment, '')
+        self.assertEquals(doc1.zip().comment, b'')
         self.assertEquals(doc1.zip().part_extract('[Content_Types].xml').read(10),
                           b'\x3C\x3F\x78\x6D\x6C\x20\x76\x65\x72\x73')
         self.assertEquals(len(doc1.zip().namelist()), 17)
@@ -63,9 +71,9 @@ class PackageTest(unittest.TestCase):
         self.assertEquals(doc2.zip().part_info(
             '[Content_Types].xml').compress_size, 406)
         self.assertEquals(doc2.zip().part_info('[Content_Types].xml').date_time,
-                          (2013, 07, 03, 15, 22, 12))
+                          (2013, 7, 3, 15, 22, 12))
         self.assertEquals(doc2.zip().part_info('[Content_Types].xml').comment,
-                          '')
+                          b'')
 
         with self.assertRaises(ZipCRCError):
             Document('testdocs/badcrc.docx').zip()
@@ -251,13 +259,14 @@ class PackageTest(unittest.TestCase):
                          'Part [/word/document.xml]')
         self.assertEqual(doc1.part_by_name['/word/document.xml'].relationships_out()[2].to_reference(),
                          'Relationship [rId7] (source Part [/word/document.xml])')
-        self.assertEqual(doc1.part_by_name['/word/document.xml'].to_json()[0:30],
-                         '{\n    "content-type": "applica')
-        self.assertEqual(doc1.relationships[0].to_json()[0:32],
-                         '{\n    "source": "Part [RootPart]')
-        self.assertEqual(doc1.to_json()[0:20], '{\n    "document": [\n')
-        self.assertEqual(doc1.to_json(include_stream=True)[285:325],
-                         '     "stream_b64": "PD94bWwgdmVyc2lvbj0i')
+        if sys.version_info[0] == 2:
+            self.assertEqual(doc1.part_by_name['/word/document.xml'].to_json()[0:30],
+                             '{\n    "content-type": "applica')
+            self.assertEqual(doc1.relationships[0].to_json()[0:32],
+                             '{\n    "source": "Part [RootPart]')
+            self.assertEqual(doc1.to_json()[0:20], '{\n    "document": [\n')
+            self.assertEqual(doc1.to_json(include_stream=True)[285:325],
+                             '     "stream_b64": "PD94bWwgdmVyc2lvbj0i')
 
     def testBugs(self):
         # Regression test for BUG OXPA-83

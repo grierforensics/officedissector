@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-from distutils.core import setup
+from setuptools import setup
 
 setup(
     author='Grier Forensics',
@@ -8,5 +8,8 @@ setup(
     description="""OfficeDissector is a parser library for static security analysis of OOXML documents.""",
     name='officedissector',
     version='1.0',
+    test_suite="test",
     url='http://www.officedissector.com/',
-    packages=['officedissector'])
+    packages=['officedissector'],
+    install_requires=['lxml']
+)

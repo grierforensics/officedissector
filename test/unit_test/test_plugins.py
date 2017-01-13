@@ -13,9 +13,8 @@ import glob
 class PluginTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.mastiff_dir = sys.argv[1]
-        global test_dir
-        cls.test_dir = test_dir
+        cls.test_dir = os.path.dirname(os.path.realpath(__file__))
+        os.chdir(cls.test_dir)
         docs = ['testdocs/037027.pptx',
                 'testdocs/content.docx',
                 'testdocs/sounds.pptx',
@@ -23,11 +22,12 @@ class PluginTest(unittest.TestCase):
                 'testdocs/url.docx',
                 'testdocs/test.docx',
                 'testdocs/macros2.xlsm']
-        print 'Running MASTIFF plugins on test documents...'
+        print('Running MASTIFF plugins on test documents...')
         for doc in docs:
             cls.run_mastiff(doc)
 
     # DEV-08.1
+    @unittest.skip("MASTIFF not supported in python 3.*, broken in python2")
     def testMultimediaPlugin(self):
         types = ['*.jpeg', '*.png', '*.gif', '*.wmf', '*.wdp', '*.wav',
                  '*.odttf', '*.emf']
@@ -53,6 +53,7 @@ class PluginTest(unittest.TestCase):
         self.assertEqual(len(self.getPartsFromDir(doc4, types)), 0)
 
     # DEV-08.2
+    @unittest.skip("MASTIFF not supported in python 3.*, broken in python2")
     def testURLPlugin(self):
         doc1 = 'testdocs/037027.pptx'
         urls1 = self.getURLsFromFile(doc1)
@@ -70,6 +71,7 @@ class PluginTest(unittest.TestCase):
         self.assertEqual(len(urls3), 0)
 
     # DEV-08.3
+    @unittest.skip("MASTIFF not supported in python 3.*, broken in python2")
     def testEmbeddedCodePlugin(self):
         types = ['*vba*.bin']
         doc1 = 'testdocs/macros.xlsm'
@@ -83,30 +85,27 @@ class PluginTest(unittest.TestCase):
 
     @classmethod
     def run_mastiff(cls, doc):
-        os.chdir(cls.mastiff_dir)
         try:
-            p = subprocess.Popen(['mas.py',
-                                  '-c', os.path.join(cls.mastiff_dir, 'mastiff.conf'),
+            p = subprocess.Popen(['mas.py', '-c', './mastiff.conf',
                                   os.path.join(cls.test_dir, doc)],
                                  stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
         except OSError as e:
             if e.errno == os.errno.ENOENT:
-                print '\nmas.py cannot be found.'
-                print 'Please ensure that MASTIFF is installed.'
+                print('\nmas.py cannot be found.')
+                print('Please ensure that MASTIFF is installed.')
                 sys.exit(1)
             else:
                 raise
         out, err = p.communicate()
-        if 'Could not read any configuration files' in out:
-            print '\n\n' + out
-            print 'Most likely your argument does not point to'
-            print 'a valid MASTIFF source directory.'
+        if 'Could not read any configuration files' in out.decode('utf-8'):
+            print('\n\n' + out)
+            print('Most likely your argument does not point to')
+            print('a valid MASTIFF source directory.')
             sys.exit(1)
-        os.chdir(cls.test_dir)
 
     def getPartsFromDir(self, doc, types):
-        print 'mastiffparts %s' % self.mastiff_dir
-        parts_path = os.path.join(self.mastiff_dir,
+        print('mastiffparts %s' % os.path.dirname(os.path.realpath(__file__)))
+        parts_path = os.path.join(os.path.dirname(os.path.realpath(__file__)),
                                   'work/log',
                                   hashlib.md5(open(doc, 'rb').read()).hexdigest(),
                                   'parts')
@@ -116,10 +115,10 @@ class PluginTest(unittest.TestCase):
         return files_grabbed
 
     def getURLsFromFile(self, doc):
-        url_filepath = os.path.join(self.mastiff_dir,
-                                  'work/log',
-                                  hashlib.md5(open(doc, 'rb').read()).hexdigest(),
-                                  'urls.txt')
+        url_filepath = os.path.join(os.path.dirname(os.path.realpath(__file__)),
+                                    'work/log',
+                                    hashlib.md5(open(doc, 'rb').read()).hexdigest(),
+                                    'urls.txt')
         url_file = open(url_filepath, 'r')
         url_file.readline()  # Skip first line header
         urls = []
@@ -130,17 +129,10 @@ class PluginTest(unittest.TestCase):
         url_file.close()
         return urls
 
-# For some odd reason, abspath() in unittest class method gives
-# incorrect path, so use global variable instead.
-test_dir = os.path.abspath(os.path.dirname(__file__))
 
 def main():
-    if len(sys.argv) != 2:
-        print "\nUsage: " + sys.argv[0] + " MASTIFF_SOURCE_DIR\n\n"
-        sys.exit(1)
-    os.chdir(os.path.abspath(os.path.dirname(__file__)))
     suite = unittest.TestLoader().loadTestsFromTestCase(PluginTest)
-    result = unittest.TextTestRunner(verbosity=2).run(suite)
+    result = unittest.TextTestRunner(verbosity=3).run(suite)
     if not result.wasSuccessful():
         sys.exit(1)
 
