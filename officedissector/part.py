@@ -50,8 +50,9 @@ class Part(object):
 
         :return: an `ElementTree` of the parsed XML
         """
+        parser = etree.XMLParser(resolve_entities=False)
         try:
-            xml_etree = etree.parse(self.stream())
+            xml_etree = etree.parse(self.stream(), parser)
         except etree.XMLSyntaxError:
             print('part cannot be parsed successfully: %r' % self)
             raise
