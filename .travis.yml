@@ -26,7 +26,7 @@ install:
     - pip install codecov
     - python setup.py -q install
     - pushd test/fraunhoferlibrary
-    - wget http://www.officedissector.com/corpus/fraunhoferlibrary.zip
+    - wget --no-check-certificate http://www.officedissector.com/corpus/fraunhoferlibrary.zip
     - unzip -o fraunhoferlibrary.zip
     - popd
 
