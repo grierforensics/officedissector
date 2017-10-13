@@ -304,6 +304,9 @@ class PackageTest(unittest.TestCase):
             self.assertEqual(self.test_stdout.getvalue(),
                              'part cannot be parsed successfully: Part [/[Content_Types].xml]')
 
+    def testDenialOfService(self):
+        doc = Document('testdocs/dos.docx')
+
 
 def main():
     os.chdir(os.path.abspath(os.path.dirname(__file__)))
